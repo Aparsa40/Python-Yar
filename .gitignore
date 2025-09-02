@@ -1,0 +1,22 @@
+# Node.js dependencies
+node_modules/
+
+# پوشه تولیدی پروژه
+dist/
+
+# فایل‌های log و موقت
+*.log
+*.tmp
+
+# فایل‌های تنظیمات محیط محلی
+*.env
+.vscode/
+
+# فایل‌های سیستمی که نباید version control بشن
+.DS_Store
+Thumbs.db
+#فایل های وورد که نباید pushبشن
+~$-Learning.docx
+~$rdpress-Learning.docx
+~$thon-Training-beginner-to-advanced.docx
+desktop.ini

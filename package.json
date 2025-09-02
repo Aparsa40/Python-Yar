@@ -1,0 +1,20 @@
+{
+  "name": "Application-Ebook-PythonYar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "npx rimraf dist/ && npx electron-builder --win --x64 --ia32"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^37.4.0",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2",
+    "rimraf": "^6.0.1"
+  }
+}

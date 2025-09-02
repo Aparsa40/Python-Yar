@@ -1,0 +1,51 @@
+name: Electron App Build & Release
+
+on:
+  push:
+    branches:
+      - master  # وقتی push روی master شد اجرا میشه
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # مرحله 1: clone ریپو
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # مرحله 2: نصب Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # مرحله 3: نصب وابستگی‌ها
+      - name: Install dependencies
+        run: npm install
+
+      # مرحله 4: Build پروژه
+      - name: Build Electron App
+        run: npm run build
+        # فرض بر اینه که دستور build تو package.json داری
+        # مثال: "build": "electron-builder"
+
+      # مرحله 5: آپلود build به Release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v1-${{ github.run_number }}
+          release_name: Release v1-${{ github.run_number }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/my-electron-app-setup.exe  # مسیر فایل خروجی build
+          asset_name: my-electron-app-setup.exe
+          asset_content_type: application/octet-stream
